@@ -7,6 +7,7 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
 import com.hib.dao.HibernateDAO;
+import com.hib.entity.Project;
 import com.hib.entity.StudentDemo;
 import com.hib.entity.StudentDetails;
 import com.hib.entity.Subject;
@@ -22,6 +23,7 @@ public class HibernateDAOImpl implements HibernateDAO
 				.addAnnotatedClass(StudentDemo.class)
 				.addAnnotatedClass(StudentDetails.class)
 				.addAnnotatedClass(Subject.class)
+				.addAnnotatedClass(Project.class)
 				.buildSessionFactory()
 				.openSession();
 	}

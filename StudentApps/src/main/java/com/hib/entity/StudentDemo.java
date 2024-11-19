@@ -5,10 +5,14 @@ import java.util.List;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinColumns;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -30,19 +34,30 @@ public class StudentDemo
 	@Column(name="pincode")
 	private int pincode;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name="studentdetailid")
 	private StudentDetails studentDetails;
 	
 	
-	@OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "student", cascade = CascadeType.ALL, fetch=FetchType.LAZY)
 	private List<Subject> subjects;
 	
 	
+	@ManyToMany(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
+	@JoinTable(name="student_project", 
+				joinColumns= {@JoinColumn(name="sid")},
+				inverseJoinColumns = {@JoinColumn(name="pid")})
+	private List<Project> projectList;
 	
 	
 	
 	
+	public List<Project> getProjectList() {
+		return projectList;
+	}
+	public void setProjectList(List<Project> projectList) {
+		this.projectList = projectList;
+	}
 	public List<Subject> getSubjects() {
 		return subjects;
 	}

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.hib.daoimpl.HibernateDAOImpl;
+import com.hib.entity.Project;
 import com.hib.entity.StudentDemo;
 import com.hib.entity.StudentDetails;
 import com.hib.entity.Subject;
@@ -16,45 +17,78 @@ public class Main
 	{		
 		hdaoi = new HibernateDAOImpl();
 		
-		Subject sb1 = new Subject("HTML", 10);
-		Subject sb2 = new Subject("CSS", 20);
-		Subject sb3 = new Subject("Javascript", 30);
-		Subject sb4 = new Subject("Hibernate", 20);
-		Subject sb5 = new Subject("Spring", 30);
 		
-		List<Subject> set1 = new ArrayList<Subject>();
-		set1.add(sb1);
-		set1.add(sb2);
-		set1.add(sb3);
+		StudentDemo s = hdaoi.fetchOne(402);
 		
-		List<Subject> set2 = new ArrayList<Subject>();
-		set2.add(sb3);
-		set2.add(sb4);
-		set2.add(sb5);
-
-		StudentDemo sd = new StudentDemo("Gambir", "gambir@gmail.com", "MG Road", 245212);
-		StudentDetails sds = new StudentDetails("23233434", "Kolkata", "WB");
-		sd.setStudentDetails(sds);
-		sds.setStudent(sd);
-		sd.setSubjects(set1);
-		sb1.setStudent(sd);
-		sb2.setStudent(sd);
-		sb3.setStudent(sd);
+		System.out.println("\n\n\n\n\n\n\n\nStudent Data");
+		System.out.println(s.getSid()+" "+s.getSname()+"  "+s.getEmail()+"  "+s.getAddress()+" "+s.getPincode());
+		
+		System.out.println("\n\n\nStudent Details");
+		System.out.println(s.getStudentDetails());
+		
+		System.out.println("\n\n\nEnrolled Subjects");
+		for(Subject subs : s.getSubjects())
+		{
+			System.out.println(subs);
+		}
 		
 		
-//		StudentDemo sd1 = new StudentDemo("Prathik", "prathik@gmail.com", "BTM", 560076);
-//		StudentDetails sds1 = new StudentDetails("456453343", "Patna", "OD");
+		System.out.println("\n\n\nProjects Exp");
+		for(Project p : s.getProjectList())
+		{
+			System.out.println(p.getPid()+"  "+p.getPname()+"  "+p.getNoOfHours()+"  "+p.getMarks());
+		}
+		
+		
+//		
+//		Subject sb1 = new Subject("Maths", 10);
+//		Subject sb2 = new Subject("Science", 20);
+//		Subject sb3 = new Subject("Social", 30);
+//		Subject sb4 = new Subject("Logic Building", 20);
+//		
+//		Project p1 = new Project("LMS",30,60);
+//		Project p2 = new Project("Frontend",40,70);
+//		Project p3 = new Project("Drive portal",30,40);
+//		
+//		ArrayList<Project> plist = new ArrayList<Project>();
+//		plist.add(p1);
+//		plist.add(p2);
+//		plist.add(p3);
+//		
+//		List<Subject> set1 = new ArrayList<Subject>();
+//		set1.add(sb1);
+//		set1.add(sb2);
+//		set1.add(sb3);
+//		
+//		List<Subject> set2 = new ArrayList<Subject>();
+//		set2.add(sb3);
+//		set2.add(sb4);
+//
+//		StudentDemo sd = new StudentDemo("Gautham", "gautham@gmail.com", "MG Road", 232132);
+//		StudentDetails sds = new StudentDetails("345435234", "Kolkata", "WB");
+//		sd.setStudentDetails(sds);
+//		sds.setStudent(sd);
+//		sd.setSubjects(set1);
+//		sb1.setStudent(sd);
+//		sb2.setStudent(sd);
+//		sb3.setStudent(sd);
+//		sd.setProjectList(plist);
+//		
+//		
+//		
+//		StudentDemo sd1 = new StudentDemo("Saif", "saif@gmail.com", "BTM", 560076);
+//		StudentDetails sds1 = new StudentDetails("544656545", "Banglore", "KA");
 //		sd1.setStudentDetails(sds1);
 //		sds1.setStudent(sd1);
 //		sd1.setSubjects(set2);
 //		sb3.setStudent(sd1);
 //		sb4.setStudent(sd1);
-//		sb5.setStudent(sd1);
-		
+//		
+////		
+//		hdaoi.insertStudent(sd);
+//		System.out.println("Success1");
 //		hdaoi.insertStudent(sd1);
-		hdaoi.insertStudent(sd);
-		
-		System.out.println("Success");
+//		System.out.println("Success2");
 		
 		
 		
